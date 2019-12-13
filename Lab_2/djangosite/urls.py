@@ -1,0 +1,25 @@
+"""djangosite URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/2.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from djangoapp.views import MeasurementList, MeasurementCreate,LineChartJSONView
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+	path('', MeasurementList.as_view(), name='measurement_list'),
+	path('create/',MeasurementCreate.as_view(), name='create_measurement'),
+    path('line_chart_json/', LineChartJSONView.as_view(), name='line_chart_json')
+]

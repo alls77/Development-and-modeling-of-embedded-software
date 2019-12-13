@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<html>
+<head>
+	<title>Chart</title>
+</head>
+<body>
+	<h3>Виміри</h3>
+	<p><a href="{% url 'create_measurement' %}">Додати вимір</a></p>
+	<canvas id="myChart" width="800" height="500"></canvas>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+	<script type="text/javascript">
+		$.get('{% url "line_chart_json" %}', function (data) {
+			var ctx = $("#myChart").get(0).getContext("2d");
+			new Chart(ctx, {
+				type: 'line',
+				data: data,
+				options: {
+					responsive: false
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>
